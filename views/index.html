@@ -1,0 +1,122 @@
+<html>
+  <head>
+    <title>FCC ISQA Project - Personal Library</title>
+    <!--<meta name="description" content="A cool thing made with HyperDev">-->
+    <link id="favicon" rel="icon" href="https://hyperdev.com/favicon-app.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="/public/style.css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  </head>
+  <body class="container content">
+    <header style="margin-top:5%">
+      <h1>
+        <b>ISQA Project</b> - Personal Library
+      </h1>
+    </header>
+    <br>
+    <div id="userstories">
+      <h2>User stories:</h2>
+      <ol>
+        <li>Nothing from my website will be cached in my client as a security measure.</li>
+        <li>I will see that the site is powered by 'PHP 4.2.0' even though it isn't as a security measure.</li>
+        <li>I can <b>post</b> a <code>title</code> to /api/books to add a book and returned will be the object with the <code>title</code> and a unique <code>_id</code>.</li>
+        <li>I can <b>get</b> /api/books to retrieve an aray of all books containing <code>title</code>, <code>_id</code>, & <code>commentcount</code>.</li>
+        <li>I can <b>get</b> /api/books/{_id} to retrieve a single object of a book containing <code>title</code>, <code>_id</code>, & an array of <code>comments</code> (empty array if no comments present).</li>
+        <li>I can <b>post</b> a <code>comment</code> to /api/books/{_id} to add a comment to a book and returned will be the books object similar to <b>get</b> /api/books/{_id}.</li>
+        <li>I can <b>delete</b> /api/books/{_id} to delete a book from the collection. Returned will be 'delete successful' if successful.</li>
+        <li>If I try to request a book that doesn't exist I will get a 'no book exists' message.</li>
+        <li>I can send a <b>delete</b> request to /api/books to delete all books in the database. Returned will be 'complete delete successful' if successful.</li>
+        <li>All 6 functional tests required are complete and passing.</li>
+      </ol>
+      <br>
+      <img src="https://cdn.gomix.com/d7932c52-287f-4dae-b175-631fef453000%2FScreen%20Shot%202016-12-16%20at%201.35.56%20AM.png" />
+    </div>
+    <hr style="margin: 5% auto">
+    <div id ="sampleposting" class="columns">
+      <div class="column is-two-fifths has-text-centered">
+        <h2 style="text-align: left">Test API responses:</h2><br>
+        <form action="/api/books" method="post" class="">
+          <h4>Test post to /api/books</h4>
+          <div class="field">
+            <label class="label">Book Title:</label>
+            <div class="control">
+              <input type="text" name="title" value="" class="input">
+            </div>
+          </div>
+          <div class="field is-grouped  is-grouped-centered">
+            <div class="control">
+              <input type="submit" value="Submit" class="button is-info">
+            </div>
+          </div>
+        </form><br>
+        <form action="" method="post" id="commentTest" class="">
+          <h4>Test post to /api/books/{bookid}</h4>
+          <div class="field">
+            <label class="label">BookId to comment on:</label>
+            <div class="control">
+              <input type="text" name="id" value="" id="idinputtest" class="input">
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Comment:</label>
+            <div class="control">
+              <input type="text" name="comment" value="" class="input">
+            </div>
+          </div>
+          <div class="field is-grouped  is-grouped-centered">
+            <div class="control">
+              <input type="submit" value="Submit" class="button is-info">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <hr style="margin: 5% auto">
+    <div id="sampleui columns">
+      <div class="column is-two-fifths">
+        <h2 style="text-align: left">Sample Front-End:</h2>
+        <form id="newBookForm" class="box">
+          <div class="field">
+            <div class="control">
+              <input type="text" id="bookTitleToAdd" name="title" placeholder="New Book Title" style="" class="input">
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <button type="submit" value="Submit" id="newBook" class="button is-info">Submit New Book!</button>
+            </div>
+          </div>
+        </form>
+        <div id="display" class="menu"></div>          
+        <div id="bookDetail" class="box" style="margin-bottom: 1em;">
+          <p id="detailTitle" style="margin-bottom: 0">Select a book to see it's details and comments</p>
+          <ol id="detailComments" type="1" style="margin-left: 0; list-style-position: inside"></ol>
+        </div><br>
+        <div class="field">
+          <div class="control">
+            <button id="deleteAllBooks" class="button is-danger">Delete all books...</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr style="margin: 5% auto">
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
+            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+            crossorigin="anonymous"></script>
+    <script src="/public/client.js"></script>           
+    <script>
+      /*
+      *  For #sampleposting to update form action url to test inputs book id
+      */
+      $(function() {
+       $('#commentTest').submit(function(){
+         var id = $('#idinputtest').val();
+         $(this).attr('action', "/api/books/" + id);
+       });
+      });
+   </script>
+  </body>
+</html>
